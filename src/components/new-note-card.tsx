@@ -7,6 +7,8 @@ interface NewNoteCardProps{
   onNoteCreated: (content: string) => void
 }
 
+let speechRecognition: SpeechRecognition | null = null
+
 export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true)
   const [isRecording, setisRecording] = useState(false)
@@ -54,7 +56,7 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
 
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
 
-    const speechRecognition = new SpeechRecognitionAPI()
+    speechRecognition = new SpeechRecognitionAPI()
 
     speechRecognition.lang = 'pt-BR'
     speechRecognition.continuous = true
@@ -62,9 +64,11 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
     speechRecognition.interimResults = true
 
     speechRecognition.onresult = (event) => {
-      const transcription = Array.from(event.results).reduce((text) => {
-        // 41:09
+      const transcription = Array.from(event.results).reduce((text, result) => {
+        return text.concat(result[0].transcript)
       }, '')
+
+      setContent(transcription)
     }
 
     speechRecognition.onerror = (event) => {
@@ -76,6 +80,10 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
 
   function handleStopRecording(){
     setisRecording(false)
+
+    if(speechRecognition !== null){
+      speechRecognition.stop()
+    }
   }
 
   return (
@@ -91,7 +99,7 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
 
       <Dialog.Portal>
         <Dialog.Overlay className='inset-0 fixed bg-black/50' />
-        <Dialog.Content className='fixed overflow-hidden left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[640px] w-full h-[60vh] bg-slate-700 rounded-md flex flex-col outline-none'>
+        <Dialog.Content className='fixed overflow-hidden inset-0 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[640px] w-full md:h-[60vh] bg-slate-700 md:rounded-md flex flex-col outline-none'>
           <Dialog.Close className='absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100'>
             <X className='size-5' />
           </Dialog.Close>
