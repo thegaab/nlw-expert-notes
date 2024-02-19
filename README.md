@@ -2,7 +2,7 @@
   NWL expert notes
 </h1>
 
-## A interative webpage to take notes writing and recording audios using technologies like <a href="https://vitejs.dev/">vitejs<a> and some tools like <a href="https://sdk.vercel.ai/docs">Vercel AI SDK<a>, <a href="https://tailwindcss.com/">tailwind CSS<a>, <a href="https://sonner.emilkowal.ski/">sooner <a>, <a href="https://lucide.dev/">lucide-react <a>.
+## A interative webpage to take notes writing and recording audios using technologies like <a href="https://vitejs.dev/">vitejs<a> and some tools like <a href="https://tailwindcss.com/">tailwind CSS<a>, <a href="https://sonner.emilkowal.ski/">sooner <a>, <a href="https://lucide.dev/">lucide-react <a>.
 #
   <h1 align="center"> <a href="https://expertnotes-seven.vercel.app/">Check the aplication<a></h1>
     
