@@ -21,8 +21,20 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
                 </span>
                 <p className='text-sm leading-6 text-slate-400'>
                     {note.content}
+                    {
+                    note.content.includes("https://www.youtube.com/") && (
+                        <iframe
+                            width="100%"
+                            height="auto"
+                            src={`https://www.youtube.com/embed/${note.content.split("v=")[1]}`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    )
+                }
                 </p>
-
                 <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none' />
             </Dialog.Trigger>
 

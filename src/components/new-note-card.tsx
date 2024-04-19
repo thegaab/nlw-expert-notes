@@ -57,8 +57,7 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
 
     speechRecognition = new SpeechRecognitionAPI()
-
-    speechRecognition.lang = 'pt-BR'
+    speechRecognition.lang = 'auto'
     speechRecognition.continuous = true
     speechRecognition.maxAlternatives = 1
     speechRecognition.interimResults = true
@@ -85,7 +84,7 @@ export function NewNoteCard({onNoteCreated}: NewNoteCardProps) {
       speechRecognition.stop()
     }
   }
-
+  console.log("i'm ")
   return (
     <Dialog.Root>
       <Dialog.Trigger className='rounded-md flex flex-col bg-slate-700 text-left p-5 gap-3 hover:ring-2 outline-none hover:ring-slate-600 focus-visible:ring-1 focus-visible:ring-lime-400'>
